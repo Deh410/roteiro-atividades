@@ -18,6 +18,11 @@ describe('app', function() {
     expect(testApp.messages.length).to.equal(2)
   })
 
+  it('getAll returns all messages', function() {
+    expect(testApp.getAll()).to.be.an('array')
+    expect(testApp.getAll().length).to.equal(1)
+  })
+
   it('message has content, date and id', function() {
     expect(testApp.messages[0].content).to.equal('hi world')
     expect(testApp.messages[0].date).not.to.equal(undefined)
@@ -81,6 +86,26 @@ describe('app', function() {
     testFileReadApp.delete(1)
     let testFileClearedApp = new MessageApp("/\///json/\//testMessages.json")
     expect(testFileClearedApp.messages.length).to.equal(0) 
+  })
+
+  it("rejects empty messages", function() {
+    let testApp = new MessageApp()
+    expect(testApp.post('')).to.deep.equal([])
+  })
+
+  it('no messages if no messages are sent', function() {
+    let testApp = new MessageApp()
+    expect(testApp.getAll()).to.deep.equal([])
+  })
+
+  it('rejects false update', function() {
+    let testApp = new MessageApp()
+    expect(testApp.update(0, "")).to.deep.equal([])
+  })
+
+  it('errors if no message to delete', function() {
+    let testApp = new MessageApp()
+    expect(testApp.delete(0)).to.deep.equal('Message not found in database')
   })
 
 })
