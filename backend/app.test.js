@@ -64,7 +64,7 @@ describe('app', function() {
   })
 
   it("app reads from given filepath", function() {
-    let testFileApp = new MessageApp("/\///json/\testMessages.json")
+    let testFileApp = new MessageApp("/\///json/\//testMessages.json")
     expect(testFileApp.messages.length).to.equal(1)
   })
 
