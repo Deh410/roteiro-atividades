@@ -13,10 +13,10 @@ class MessageApp {
     this.messages = []
   }
 
-  post(content) {
+  post(message) {
     let item = {
       id: newId(this.messages),
-      content: content,
+      content: message,
       date: new Date()
     }
     this.messages.push(item)
@@ -24,16 +24,16 @@ class MessageApp {
   }
 
   get(id){
-    return this.messages[id]
+    return this.messages.filter(message => message.id == id)[0]
   }
 
   update(id, update){
-    this.messages[id].content = update
-    return this.messages[id]
+    let index = this.messages.findIndex(message => message.id == id)
+    this.messages[index].content = update
   }
 
   delete(id) {
-    this.messages.splice(id - 1, 1)
+    this.messages = this.messages.filter(message => message.id != id)
     return this.messages
   }
 }
