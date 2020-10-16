@@ -22,6 +22,21 @@ describe("Message API endpoint tests", function() {
       done()
     })
   })
+
+  it("deletes a message", function(done) {
+    const res = request(MessageApp)
+    .delete("/delete/1")
+    .set("Accept", "application/json")
+
+    res.expect(200)
+    .end(function(err, res) {
+      if (err) {
+        return done(err)
+      }
+      expect(res.body.length).to.equal(0)
+      done()
+    })
+  })
   
   it("gets from backend messages", function(done){
     const res = request(MessageApp).get("/")
