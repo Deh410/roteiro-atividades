@@ -1,4 +1,4 @@
-import MessageApp from './lib/model'
+import MessageApp from './model'
 
 let messageApp
 if (process.env.npm_lifecycle_event == "test"){
