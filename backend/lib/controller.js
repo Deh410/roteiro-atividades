@@ -10,10 +10,10 @@ if (process.env.npm_lifecycle_event == "test"){
 function getAll() {
   return new Promise((resolve, reject) => {
     let result = messageApp.getAll()
-    if(result !== []) {
+    if(result.length !== 0) {
       resolve(result)
     } else {
-      reject(result)
+      reject("No messages in database")
     }
   })
 }
