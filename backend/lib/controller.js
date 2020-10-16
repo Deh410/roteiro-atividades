@@ -43,10 +43,10 @@ function deleteMessage(id) {
 function getSingleMessage(id) {
   return new Promise((resolve, reject) => {
     let result = messageApp.get(id)
-    if(result !== []) {
+    if(result) {
       resolve(result)
     } else {
-      reject(result)
+      reject("Message not found in database")
     }
   })
 }
@@ -54,10 +54,10 @@ function getSingleMessage(id) {
 function updateMessage(id, content) {
   return new Promise((resolve, reject) => {
     let result = messageApp.update(id, content)
-    if(result !== []) {
+    if(result.length !== 0) {
       resolve(result)
     } else {
-      reject(result)
+      reject("You can't post an empty message")
     }
   })
 }

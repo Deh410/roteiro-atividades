@@ -118,4 +118,57 @@ describe("Handle message api error correctly", function() {
       done()
     })
   })
+
+  it("errors if cant find single message", function(done){
+    const res = request(MessageApp)
+    .get("/message/1")
+
+    res.expect(404)
+    .end(function(err, res){
+      if(err){
+        return done(err)
+      }
+      expect(res.body).to.equal("Message not found in database")
+      done()
+    })
+  })
+
+  it("errors on bad update", function(done) {
+    const data = {
+      content: "Hello World"
+    }
+    const res = request(MessageApp)
+    .put("/update/0")
+    .send(data)
+    .set("Accept", "application/json")
+
+    res.expect(404)
+    .end(function(err, res) {
+      if(err){
+        return done(err)
+      }
+      expect(res.body).to.equal("You can't post an empty message")
+      done()
+    })
+  })
+
+  it("errors deleting message that doesn't exist", function(done) {
+    const data = {
+      id: 0
+    }
+
+    const res = request(MessageApp)
+    .delete("/delete/0")
+    .send(data)
+    .set("Acccept", "application/json")
+
+    res.expect(404)
+    .end(function(err, res) {
+      if(err){
+        return done(err)
+      }
+      expect(res.body).to.equal("Message not found in database")
+      done()
+    })
+  })
 })
