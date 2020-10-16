@@ -23,6 +23,50 @@ describe("Message API endpoint tests", function() {
     })
   })
 
+  it("gets a single message", function(done) {
+    const res = request(MessageApp)
+    .get("/message/1")
+    res.expect(200)
+    .end(function(err, res) {
+      if (err) {
+        return done(err)
+      }
+      expect(res.body[0].content).to.equal('hi world')
+      done()
+    })
+  })
+
+  it("updates a message", function(done) {
+    data = {
+      content: "Hello World"
+    }
+    const res = request(MessageApp)
+    .put('/update/1')
+    .send(data)
+    .set("Accetp", "application/json")
+
+    res.expect(200)
+    .end(function(err, res) {
+      if(err) {
+        return done(err)
+      }
+      expect(res.body[0].content).to.equal("Hello World")
+      done()
+    })
+  })
+
+  it("gets from backend messages", function(done){
+    const res = request(MessageApp).get("/")
+    res.expect(200)
+    .end(function(err, res){
+      if(err) {
+        return done(err)
+      }
+      expect(res.body.length).to.equal(1)
+      done()
+    })
+  })
+
   it("deletes a message", function(done) {
     const res = request(MessageApp)
     .delete("/delete/1")
@@ -38,15 +82,5 @@ describe("Message API endpoint tests", function() {
     })
   })
   
-  it("gets from backend messages", function(done){
-    const res = request(MessageApp).get("/")
-    res.expect(200)
-    .end(function(err, res){
-      if(err) {
-        return done(err)
-      }
-      expect(res.body.length).to.equal(1)
-      done()
-    })
-  })
+  
 })
