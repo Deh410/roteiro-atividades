@@ -83,6 +83,25 @@ describe("Message API endpoint tests", function() {
       done()
     })
   })
-  
-  
+})
+
+describe("Handle message api error correctly", function() {
+  it("posts a message error", function(done) {
+    data = {
+      content: ""
+    }
+    const res = request(MessageApp)
+    .post("/message")
+    .send(data)
+    .set("Accept", "application/json")
+
+    res.expect(404)
+    .end(function(err, res) {
+      if(err) {
+        return done(err)
+      }
+      expect(res.body).to.equal("You can't post an empty message")
+      done()
+    })
+  })
 })
