@@ -42,7 +42,7 @@ function deleteMessage(id) {
 
 function getSingleMessage(id) {
   return new Promise((resolve, reject) => {
-    let result = messageApp.update(id)
+    let result = messageApp.get(id)
     if(result !== []) {
       resolve(result)
     } else {
@@ -51,9 +51,9 @@ function getSingleMessage(id) {
   })
 }
 
-function updateMessage(id) {
+function updateMessage(id, content) {
   return new Promise((resolve, reject) => {
-    let result = messageApp.update(id)
+    let result = messageApp.update(id, content)
     if(result !== []) {
       resolve(result)
     } else {
