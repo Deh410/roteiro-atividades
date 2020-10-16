@@ -1,25 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
+import MessageList from './components/messageList'
+import MessageForm from './components/messageForm'
 import './App.css';
 
-function MessageApp() {
-  return (
-    <div className="App">
-      <textarea id='message_box'></textarea>
-      <br/>
-      <button 
-        id="submit"
-        type="submit"
-        name="Submit"
-      >Submit
-      </button>
-      <ul
-        id='message_list'
-      >
-        message 
-      </ul>      
-    </div>
-  );
+class MessageApp extends React.Component {
+  render() {
+    return (
+      <div className="App">
+        <MessageForm/>
+        <MessageList/>      
+      </div>
+    );
+  }  
 }
 
 export default MessageApp;
