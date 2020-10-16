@@ -87,7 +87,7 @@ describe("Message API endpoint tests", function() {
 
 describe("Handle message api error correctly", function() {
   it("posts a message error", function(done) {
-    data = {
+    const data = {
       content: ""
     }
     const res = request(MessageApp)
