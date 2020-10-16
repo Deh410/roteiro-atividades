@@ -104,4 +104,18 @@ describe("Handle message api error correctly", function() {
       done()
     })
   })
+
+  it("gets all errors when no messages", function(done) {
+    const res = request(MessageApp)
+    .get("/")
+
+    res.expect(404)
+    .end(function(err, res) {
+      if(err){
+        return done(err)
+      }
+      expect(res.body).to.equal("No messages in database")
+      done()
+    })
+  })
 })
