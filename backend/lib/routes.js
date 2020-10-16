@@ -4,6 +4,7 @@ const messageApp = require('./controller')
 const router = Router()
 
 router.get('/', async (req, res) => {
+  console.log(req.params, req.body)
   await messageApp.getAll()
   .then((messages) => res.json(messages))
   .catch((err) => res.status(404).json(err))
