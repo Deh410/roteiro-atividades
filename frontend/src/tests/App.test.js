@@ -1,6 +1,7 @@
 import React from 'react';
 import MessageApp from '../App';
 import mockAxios from '../__mocks__/axios'
+import errorMock from '../__mocks__/error.json'
 
 import Enzyme from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
@@ -52,5 +53,44 @@ describe('MessageApp', () => {
   it("Loads data from api", () => {
     mount(<MessageApp/>)
     expect(mockAxios.get).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe('MessageApp erroring', () => {
+  beforeEach(function() {
+    mockAxios.post.mockImplementation(() => Promise.reject({ data: errorMock}))
+    mockAxios.get.mockImplementation(() => Promise.reject({ data: errorMock }))
+  })
+
+  afterEach(function() {
+    mockAxios.post.mockClear()
+    mockAxios.get.mockClear()
+  })
+
+  it('loads err on GET err', async() => {
+    const component = await mount(<MessageApp/>)
+    await component.update()
+    expect(mockAxios.get).toHaveBeenCalledTimes(1)
+    expect(component.state().error).toEqual({
+      data: "error text from json mock"
+    })
+    expect(component.find('#error').text()).toBe('Error: error text from json mock')
+  })
+  
+  it('loads err on Post err', async() => {
+    const component = mount(<MessageApp/>)
+    component.find('textarea#message_box').simulate('change', {
+      target: {
+        value: 'bad string'
+      }
+    })
+    await component.find('form').simulate('submit')
+    await component.update()
+
+    expect(mockAxios.post).toHaveBeenCalledTimes(1)
+    expect(component.state().error).toEqual({
+      data: "error text from json mock"
+    })
+    expect(component.find('#error').text()).toBe('Error: error text from json mock')
   })
 })
