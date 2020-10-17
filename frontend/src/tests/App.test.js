@@ -9,8 +9,6 @@ import { mount } from 'enzyme'
 Enzyme.configure({ adapter: new Adapter() })
 
 describe('MessageApp', () => {
-  const component = mount(<MessageApp/>)
-
   beforeEach(function() {
     mockAxios.post.mockImplementation(() => Promise.resolve({
       data: []
@@ -22,19 +20,20 @@ describe('MessageApp', () => {
   })
 
   it('has message list', () => {
+    const component = mount(<MessageApp/>)
     expect(component.exists('ul#message_list')).toBe(true)
   })
 
   it("posts data and clears message box on submit process", () => {
     const component = mount(<MessageApp/>)
-    component.find('textarea#message_id').simulate('change', {
+    component.find('textarea#message_box').simulate('change', {
       target: {
         value: 'Hello'
       }
     })
     component.find('form').simulate('submit')
 
-    expect(mockAxios.post).tohaveBeenCalledWith("http://localhost:3001/message", {
+    expect(mockAxios.post).toHaveBeenCalledWith("http://localhost:3001/message", {
       "content": "Hello"
     })
 
