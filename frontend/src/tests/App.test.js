@@ -64,6 +64,17 @@ describe('MessageApp', () => {
     expect(mockAxios.delete).toHaveBeenCalledWith("http://localhost:3001/delete/1", {"id": 1})
     expect(component.find('ul#message_list').children().length).toBe(4);
   })
+
+  it('updates message on update', async () => {
+    const component = await mount(<MessageApp/>);
+    await component.update()
+    await component.find('ul#message_list').childAt(0).find('#update').simulate('click')
+    expect(component.find('ul#message_list').childAt(0).find('#send').text()).toBe('Send Update')
+    component.find('ul#message_list').childAt(0).find('#send').simulate('click')
+    expect(mockAxios.put).toHaveBeenCalledWith("http://localhost:3001/update/1", {"content": "Hello"});
+    expect(component.find('textarea').text()).toEqual('');
+
+  })
 })
 
 describe('MessageApp erroring', () => {

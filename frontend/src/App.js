@@ -61,7 +61,19 @@ class MessageApp extends React.Component {
       this.setMessages(result.data)
     })
     .catch((err) => {
-      this.setError(err.response)
+      this.setError(err)
+    })
+  }
+
+  sendUpdate = (id, content) => {
+    axios.put(`${PORT}/update/${id}`, {
+      content: content
+    })
+    .then(() => {
+      this.getAllMessages()
+    })
+    .catch((err) => {
+      this.setError(err)
     })
   }
 
@@ -78,6 +90,7 @@ class MessageApp extends React.Component {
         <MessageList
           messages={this.state.messages}
           handleDelete={ this.deleteMessage }
+          sendUpdate={this.sendUpdate}
         />      
       </div>
     );
