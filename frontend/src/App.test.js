@@ -25,4 +25,20 @@ describe('App', () => {
   it('has message list', () => {
     expect(component.exists('ul#message_list')).toBe(true)
   })
+
+  it("posts data and clears message box on submit process", () => {
+    const component = mount(<MessageApp/>)
+    component.find('textarea#message_id').simulate('change', {
+      target: {
+        value: 'Hello'
+      }
+    })
+    component.find('form').simulate('submit')
+
+    expect(mockAxios.post).tohaveBeenCalledWith("http://localhost:3001/message", {
+      "content": "Hello"
+    })
+
+    expect(component.instance().refs.messageFormRef.state.currentMessage).toEqual('')
+  })
 })
