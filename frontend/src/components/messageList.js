@@ -16,7 +16,12 @@ class MessageList extends React.Component{
                   <br/>
                   { message.date }
                   <br/>
-                  <button id='delete'>delete</button>
+                  <button 
+                    id='delete'
+                    onClick={() => this.props.handleDelete(message.id)}  
+                  >
+                    delete
+                  </button>
                 </li>
               ) 
             })

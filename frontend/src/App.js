@@ -53,6 +53,18 @@ class MessageApp extends React.Component {
     })
   }
 
+  deleteMessage = (id) => {
+    axios.delete(`${PORT}/delete/${id}`, {
+      id: id
+    })
+    .then((result) => {
+      this.setMessages(result.data)
+    })
+    .catch((err) => {
+      this.setError(err.response)
+    })
+  }
+
   render() {
     return (
       <div>
@@ -63,7 +75,10 @@ class MessageApp extends React.Component {
           ref='messageFormRef'
           submitMessage={ this.submitMessage }
         />
-        <MessageList/>      
+        <MessageList
+          messages={this.state.messages}
+          handleDelete={ this.deleteMessage }
+        />      
       </div>
     );
   }  
