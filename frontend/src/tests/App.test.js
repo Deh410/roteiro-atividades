@@ -81,11 +81,15 @@ describe('MessageApp erroring', () => {
   beforeEach(function() {
     mockAxios.post.mockImplementation(() => Promise.reject({ data: errorMock}))
     mockAxios.get.mockImplementation(() => Promise.reject({ data: errorMock }))
+    mockAxios.delete.mockImplementation(() => Promise.reject({ data: errorMock }))
+    mockAxios.put.mockImplementation(() => Promise.reject({ data: errorMock }))
   })
 
   afterEach(function() {
     mockAxios.post.mockClear()
     mockAxios.get.mockClear()
+    mockAxios.delete.mockClear()
+    mockAxios.put.mockClear()
   })
 
   it('loads err on GET err', async() => {
@@ -98,7 +102,7 @@ describe('MessageApp erroring', () => {
     expect(component.find('#error').text()).toBe('Error: error text from json mock')
   })
   
-  it('loads err on Post err', async() => {
+  it('loads err on POST err', async() => {
     const component = mount(<MessageApp/>)
     component.find('textarea#message_box').simulate('change', {
       target: {
@@ -109,6 +113,37 @@ describe('MessageApp erroring', () => {
     await component.update()
 
     expect(mockAxios.post).toHaveBeenCalledTimes(1)
+    expect(component.state().error).toEqual({
+      data: "error text from json mock"
+    })
+    expect(component.find('#error').text()).toBe('Error: error text from json mock')
+  })
+
+  it('loads err on DELETE err', async () => {
+    const component = await mount(<MessageApp/>)
+    component.setState({
+      messages: mockMessages,
+      loaded: true
+    })
+    await component.update()
+    await component.find('ul#message_list').childAt(0).find('#delete').simulate('click')
+    await component.update()
+    expect(component.state().error).toEqual({
+      data: "error text from json mock"
+    })
+    expect(component.find('#error').text()).toBe('Error: error text from json mock')
+  })
+
+  it('loads err on UPDATE err', async () => {
+    const component = await mount(<MessageApp/>)
+    component.setState({
+      messages: mockMessages,
+      loaded: true
+    })
+    await component.update()
+    await component.find('ul#message_list').childAt(0).find('#update').simulate('click')
+    expect(component.find('ul#message_list').childAt(0).find('#send').text()).toBe('Send Update')
+    component.find('ul#message_list').childAt(0).find('#send').simulate('click')
     expect(component.state().error).toEqual({
       data: "error text from json mock"
     })
