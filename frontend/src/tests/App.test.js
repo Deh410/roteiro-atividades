@@ -39,4 +39,9 @@ describe('MessageApp', () => {
 
     expect(component.instance().refs.messageFormRef.state.currentMessage).toEqual('')
   })
+
+  it("Loads data from api", () => {
+    mount(<MessageApp/>)
+    expect(mockAxios.get).toHaveBeenCalledTimes(1)
+  })
 })
