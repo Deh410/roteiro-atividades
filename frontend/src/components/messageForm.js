@@ -16,6 +16,7 @@ class MessageForm extends React.Component {
 
   processSubmit(e){
     e.preventDefault()
+    this.props.submitMessage(this.state.currentMessage)
     this.changeMessageValue('')
   }
 
