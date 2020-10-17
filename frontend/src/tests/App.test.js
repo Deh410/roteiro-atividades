@@ -13,10 +13,19 @@ describe('MessageApp', () => {
     mockAxios.post.mockImplementation(() => Promise.resolve({
       data: []
     }))
+    mockAxios.get.mockImplementation(() => Promise.resolve({
+      data: [{
+        id: 1,
+        content: 'hello',
+        date: '2000'
+      }]
+    }))
   })
+
 
   afterEach(function() {
     mockAxios.post.mockClear()
+    mockAxios.get.mockClear()
   })
 
   it('has message list', () => {
