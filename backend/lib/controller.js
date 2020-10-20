@@ -1,4 +1,4 @@
-import MessageApp from './model'
+import MessageModel from './model'
 
 function getAll() {
   return new Promise((resolve, reject) => {
@@ -12,7 +12,7 @@ function getAll() {
 }
 
 function post(content) {
-  let newMessage = new MessageApp({
+  let newMessage = new MessageModel({
     content: content
   })
   return newMessage.save()
