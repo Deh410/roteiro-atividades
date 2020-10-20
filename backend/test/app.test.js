@@ -1,24 +1,37 @@
 import request from 'supertest'
+import mongoose, { mongo } from 'mongoose'
 import { expect } from 'chai'
 
 import MessageApp from '../app.js'
 
 describe("Message API endpoint tests", function() {
-  it("posts a message", function(done) {
-    const data = {
+  before(function (done) {
+    mongoose.connect('mongodb://localhost/testMessages', { 
+      useNewUrlParser: true, 
+      useFindAndModify: false 
+    })
+    mongoose.connection.on('connected', function() {
+      mongoose.connection.db.dropDatabase(function(){
+        done()
+      })
+    })
+  })
+
+
+  it.only("posts a message", function(done) {
+    let data = {
       content: "hi world"
-    }
+    };
     const res = request(MessageApp)
     .post("/message")
     .send(data)
     .set("Accept", "application/json")
-
     res.expect(200)
     .end(function(err, res) {
-      if(err) {
+      if (err) {
         return done(err)
       }
-      expect(res.body[0].content).to.equal('hi world')
+      expect(res.body.content).to.equal('hi world');
       done()
     })
   })
