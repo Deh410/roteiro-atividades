@@ -1,0 +1,20 @@
+#submit {
+  padding-left: 16px;
+  padding-right: 16px;
+  width: 100%;
+  margin-bottom: 16px;
+  background-color: #1E6BAF;
+  font-weight: 400;
+}
+
+#message_box{
+  width: 100%;
+  text-align: center;
+  border: 1 solid #888;
+  border-radius: 4px;
+  overflow: hidden;
+  resize: none;
+  padding: 8px;
+  outline: none;
+  background-color: #fafafa;
+}

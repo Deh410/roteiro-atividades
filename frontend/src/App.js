@@ -1,9 +1,11 @@
 import React from 'react';
-import MessageList from './components/messageList'
-import MessageForm from './components/messageForm'
-import ErrorHandler from './components/errorHandler'
+import MessageList from './components/MessageList/messageList'
+import MessageForm from './components/MessageForm/messageForm'
+import ErrorHandler from './components/ErrorHandler/errorHandler'
 import axios from 'axios'
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Row, Col } from 'react-bootstrap'
 
 const PORT = 'http://localhost:3001'
 
@@ -81,20 +83,23 @@ class MessageApp extends React.Component {
 
   render() {
     return (
-      <div>
-        <ErrorHandler
-          error={this.state.error}
-        />
-        <MessageForm
-          ref='messageFormRef'
-          submitMessage={ this.submitMessage }
-        />
-        <MessageList
-          messages={this.state.messages}
-          handleDelete={ this.deleteMessage }
-          sendUpdate={this.sendUpdate}
-        />      
-      </div>
+      <Container fluid="sm" id="app">
+        <Row>
+          <Col>
+            <ErrorHandler
+              error={this.state.error}
+            />
+            <MessageForm
+              submitMessage={ this.submitMessage }
+            />
+            <MessageList
+              messages={this.state.messages}
+              handleDelete={ this.deleteMessage }
+              sendUpdate={this.sendUpdate}
+            />   
+          </Col>
+        </Row>
+      </Container>
     );
   }  
 }

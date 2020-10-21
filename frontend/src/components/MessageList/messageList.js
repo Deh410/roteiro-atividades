@@ -1,4 +1,6 @@
 import React from 'react'
+import './style.css'
+import { Button } from 'react-bootstrap'
 
 class MessageList extends React.Component{
   constructor() {
@@ -30,12 +32,11 @@ class MessageList extends React.Component{
 
   formatMessage(message){
     let content = message.content
-    let updateButton = <button
+    let updateButton = <Button id="button"
       onClick={() => this.toggleUpdate(message)}
-      id='update'
     >
       Editar
-    </button>
+    </Button>
 
     if(message._id === this.state.editMode.id) {
       content = (<textarea
@@ -50,12 +51,11 @@ class MessageList extends React.Component{
         id='updateBox'
       >
       </textarea>)
-      updateButton = (<button
+      updateButton = (<Button id="button"
         onClick={() => this.sendUpdate(message)}
-        id='send'
       >
         Atualizar
-      </button>)
+      </Button>)
     }
 
     return (
@@ -63,16 +63,16 @@ class MessageList extends React.Component{
         className='message'
         key={message._id}
       >
-        { content }
+        <b>{ content }</b>
         <br/>
-        { message.date }
+        { new Date(message.date).toLocaleString('en-GB') }
         <br/>
-        <button 
-          id='delete'
+        <Button 
+          id="button"
           onClick={() => this.props.handleDelete(message._id)}  
         >
           Deletar
-        </button>
+        </Button>
         { updateButton }
       </li>
     )

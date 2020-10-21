@@ -1,0 +1,27 @@
+#button {
+  width: 48%;
+  margin-right: 1%;
+  margin-left: 1%;
+  font-size: 12px;
+  background-color: #18BFB3;
+  border: none;
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
+
+ul{
+  height: 440px;
+  overflow-y: scroll;
+}
+
+@media(max-width: 800px) {
+  ul{
+    height: 550px;
+    overflow-y: scroll;
+  }
+}
+
+li {
+  list-style: none;
+  margin-bottom: 12px;
+}
