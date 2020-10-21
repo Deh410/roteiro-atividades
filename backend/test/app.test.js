@@ -4,13 +4,14 @@ import { expect } from 'chai'
 
 import MessageApp from '../app.js'
 
+let id
+
 describe("Message API endpoint tests", function() {
   before(function (done) {
     mongoose.connect('mongodb://localhost/testMessages', { 
       useNewUrlParser: true, 
       useFindAndModify: false 
-    })
-    mongoose.connection.on('connected', function() {
+    }, function(){
       mongoose.connection.db.dropDatabase(function(){
         done()
       })
@@ -18,7 +19,7 @@ describe("Message API endpoint tests", function() {
   })
 
 
-  it.only("posts a message", function(done) {
+  it("posts a message", function(done) {
     let data = {
       content: "hi world"
     };
@@ -36,15 +37,15 @@ describe("Message API endpoint tests", function() {
     })
   })
 
-  it("gets from backend messages", function(done){
+  it("gets all messages", function(done){
     const res = request(MessageApp).get("/")
     res.expect(200)
     .end(function(err, res){
       if(err) {
         return done(err)
       }
+      id = res.body[0]._id
       expect(res.body.length).to.equal(1)
-      expect(res.body[0].id).to.equal(1)
       expect(res.body[0].content).to.equal('hi world')
       done()
     })

@@ -1,14 +1,15 @@
 import MessageModel from './model'
 
 function getAll() {
-  return new Promise((resolve, reject) => {
-    let result = messageApp.getAll()
-    if(result.length !== 0) {
-      resolve(result)
-    } else {
-      reject("No messages in database")
-    }
-  })
+  // return new Promise((resolve, reject) => {
+  //   let result = messageApp.getAll()
+  //   if(result.length !== 0) {
+  //     resolve(result)
+  //   } else {
+  //     reject("No messages in database")
+  //   }
+  // })
+  return MessageModel.find()
 }
 
 function post(content) {
