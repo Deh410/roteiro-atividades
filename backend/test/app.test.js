@@ -53,13 +53,13 @@ describe("Message API endpoint tests", function() {
 
   it("gets a single message", function(done) {
     const res = request(MessageApp)
-    .get("/message/1")
+    .get(`/message/${id}`)
     res.expect(200)
     .end(function(err, res) {
       if (err) {
         return done(err)
       }
-      expect(res.body.id).to.equal(1)
+      expect(res.body.content).to.equal("hi world")
       done()
     })
   })
