@@ -4,8 +4,11 @@ class ErrorHandler extends React.Component {
   render() {
     let result
     if(this.props.error) {
-      console.log(this.props.error.response.data)
+      if(this.props.error.response.data === 'No messages in database'){
+        result = ''
+      } else {
       result = `Error: ${this.props.error.response.data}`
+      }
     }
     return <div id='error'>{result}</div>
   }

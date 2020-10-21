@@ -79,7 +79,6 @@ class MessageList extends React.Component{
   }
   
   render() {
-    console.log('messages', this.props.messages)
     if(this.props.messages){
       return(
         <div>

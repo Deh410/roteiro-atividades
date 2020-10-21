@@ -11,8 +11,7 @@ class MessageApp extends React.Component {
   constructor() {
     super()
     this.state = {
-      messages: [],
-      error: null
+      messages: []
     }
   }
 
@@ -59,7 +58,9 @@ class MessageApp extends React.Component {
       id: id
     })
     .then(() => {
+      this.setMessages(this.state.messages.filter(item => item._id !== id))
       this.getAllMessages()
+      console.log('state', this.state.messages)
     })
     .catch((err) => {
       this.setError(err)
