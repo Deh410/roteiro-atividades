@@ -135,7 +135,7 @@ describe("Handle message api error correctly", function() {
 
   it("errors if cant find single message", function(done){
     const res = request(MessageApp)
-    .get("/message/1")
+    .get(`/message/${id}`)
 
     res.expect(404)
     .end(function(err, res){
@@ -152,7 +152,7 @@ describe("Handle message api error correctly", function() {
       content: "Hello World"
     }
     const res = request(MessageApp)
-    .put("/update/0")
+    .put(`/update/${id}`)
     .send(data)
     .set("Accept", "application/json")
 
@@ -161,7 +161,7 @@ describe("Handle message api error correctly", function() {
       if(err){
         return done(err)
       }
-      expect(res.body).to.equal("You can't post an empty message")
+      expect(res.body).to.equal('Message not found in database')
       done()
     })
   })
@@ -172,7 +172,7 @@ describe("Handle message api error correctly", function() {
     }
 
     const res = request(MessageApp)
-    .delete("/delete/0")
+    .delete(`/delete/${id}`)
     .send(data)
     .set("Acccept", "application/json")
 
