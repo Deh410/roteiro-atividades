@@ -34,7 +34,7 @@ class MessageList extends React.Component{
       onClick={() => this.toggleUpdate(message)}
       id='update'
     >
-      update
+      Editar
     </button>
 
     if(message._id === this.state.editMode.id) {
@@ -54,7 +54,7 @@ class MessageList extends React.Component{
         onClick={() => this.sendUpdate(message)}
         id='send'
       >
-        Send Update
+        Atualizar
       </button>)
     }
 
@@ -71,7 +71,7 @@ class MessageList extends React.Component{
           id='delete'
           onClick={() => this.props.handleDelete(message._id)}  
         >
-          delete
+          Deletar
         </button>
         { updateButton }
       </li>
@@ -93,7 +93,7 @@ class MessageList extends React.Component{
     } else {
       return(
         <ul id='message_list'>
-          no messages
+          Sem mensagens
         </ul>
       )
     }

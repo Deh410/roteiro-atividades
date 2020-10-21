@@ -37,7 +37,7 @@ class MessageForm extends React.Component {
         id="submit"
         type="submit"
         name="Submit"
-      >Submit
+      >Enviar
       </button> 
     </form>
     )
