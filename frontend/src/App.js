@@ -55,7 +55,7 @@ class MessageApp extends React.Component {
 
   deleteMessage = (id) => {
     axios.delete(`${PORT}/delete/${id}`, {
-      id: id
+      _id: id
     })
     .then((result) => {
       this.setMessages(result.data)
