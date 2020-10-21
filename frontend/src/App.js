@@ -11,7 +11,8 @@ class MessageApp extends React.Component {
   constructor() {
     super()
     this.state = {
-      messages: []
+      messages: [],
+      error: null
     }
   }
 
@@ -55,10 +56,10 @@ class MessageApp extends React.Component {
 
   deleteMessage = (id) => {
     axios.delete(`${PORT}/delete/${id}`, {
-      _id: id
+      id: id
     })
-    .then((result) => {
-      this.setMessages(result.data)
+    .then(() => {
+      this.getAllMessages()
     })
     .catch((err) => {
       this.setError(err)

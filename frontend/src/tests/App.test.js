@@ -61,7 +61,7 @@ describe('MessageApp', () => {
     await component.update()
     await component.find('ul#message_list').childAt(0).find('button#delete').simulate('click');
     await component.update()
-    expect(mockAxios.delete).toHaveBeenCalledWith("http://localhost:3001/delete/1", {"_id": 1})
+    expect(mockAxios.delete).toHaveBeenCalledWith("http://localhost:3001/delete/1", {"id": 1})
     expect(component.find('ul#message_list').children().length).toBe(4);
   })
 
