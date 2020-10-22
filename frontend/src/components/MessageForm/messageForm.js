@@ -25,7 +25,7 @@ class MessageForm extends React.Component {
   render() {
     return(
       <div>
-        <h3>Roteiro de atividades</h3>
+        <h3>Mensagens dos alunos</h3>
         <form 
           id="message_form"
           onSubmit={(e) => this.processSubmit(e)}  
@@ -33,7 +33,7 @@ class MessageForm extends React.Component {
         <textarea 
           id='message_box'
           onChange={(e) => this.changeMessageValue(e.target.value)}
-          placeholder='Insira aqui a atividade'
+          placeholder='Insira aqui sua mensagem'
           value={ this.state.currentMessage }
         ></textarea>
         <br/>

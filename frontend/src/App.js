@@ -12,6 +12,7 @@ const PORT = 'http://localhost:3001'
 class MessageApp extends React.Component {
   constructor() {
     super()
+    // estudar hook useState
     this.state = {
       messages: []
     }
