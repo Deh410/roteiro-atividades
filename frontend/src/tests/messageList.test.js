@@ -1,5 +1,5 @@
 import React from 'react'
-import MessageList from '../components/messageList'
+import MessageList from '../components/MessageList/messageList'
 import mockMessages from '../__mocks__/messages.json'
 import Enzyme from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
@@ -24,7 +24,7 @@ describe('List', () => {
     const component = mount(<MessageList
       messages={ mockMessages }
     />)
-    expect(component.find('ul#message_list').childAt(0).exists('button#delete')).toBe(true)
+    expect(component.find('ul#message_list').childAt(0).exists('Button#delete')).toBe(true)
   })
 
   it('each message has update button', () => {
@@ -32,7 +32,7 @@ describe('List', () => {
       messages={ mockMessages }
       loaded={true}
     />)
-    expect(component.find('ul#message_list').childAt(0).find('#update').text()).toBe('update')
+    expect(component.find('ul#message_list').childAt(0).find('Button#update').text()).toBe('Editar')
   })
 
   it('update click changes button text', () => {
@@ -40,8 +40,8 @@ describe('List', () => {
       messages={mockMessages}
       loaded={true}
     />)
-    component.find('ul#message_list').childAt(0).find('#update').simulate('click')
+    component.find('ul#message_list').childAt(0).find('Button#update').simulate('click')
     expect(component.find('ul#message_list').childAt(0).find('#updateBox').text()).toBe('Hello')
-    expect(component.find('ul#message_list').childAt(0).find('#send').text()).toBe('Send Update')
+    expect(component.find('ul#message_list').childAt(0).find('Button#send').text()).toBe('Atualizar')
   })
 })

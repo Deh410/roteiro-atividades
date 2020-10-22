@@ -32,7 +32,9 @@ class MessageList extends React.Component{
 
   formatMessage(message){
     let content = message.content
-    let updateButton = <Button id="button"
+    let updateButton = <Button 
+      id='update'
+      className='button'
       onClick={() => this.toggleUpdate(message)}
     >
       Editar
@@ -51,7 +53,9 @@ class MessageList extends React.Component{
         id='updateBox'
       >
       </textarea>)
-      updateButton = (<Button id="button"
+      updateButton = (<Button 
+        id="send"
+        className="button"
         onClick={() => this.sendUpdate(message)}
       >
         Atualizar
@@ -68,7 +72,8 @@ class MessageList extends React.Component{
         { new Date(message.date).toLocaleString('en-GB') }
         <br/>
         <Button 
-          id="button"
+          id='delete'
+          className="button"
           onClick={() => this.props.handleDelete(message._id)}  
         >
           Deletar

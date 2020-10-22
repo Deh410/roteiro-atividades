@@ -1,5 +1,5 @@
 import React from 'react'
-import ErrorHandler from '../components/errorHandler'
+import ErrorHandler from '../components/ErrorHandler/errorHandler'
 import errorMock from '../__mocks__/error.json'
 
 import Enzyme from 'enzyme'
